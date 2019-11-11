@@ -94,9 +94,12 @@ let
             maintainers_eval.value
         else
           false);
+
+  build_filter = pkgs:
+    filter_packages_by_blacklist [ "bluejeans-gui" ]
+      (filter_packages_by_maintainer "veprbl" pkgs);
 in
-  recurse_filter
-    (pkgs:
-      filter_packages_by_blacklist [ "bluejeans-gui" ]
-        (filter_packages_by_maintainer "veprbl" pkgs))
-    nixpkgs.pkgs
+builtins.mapAttrs (name: value: recurseIntoAttrs (recurse_filter build_filter value))
+  {
+    inherit (nixpkgs) pkgs pkgsi686Linux;
+  }
