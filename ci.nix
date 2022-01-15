@@ -1,10 +1,5 @@
 let
-  nixpkgs = import (builtins.fetchGit {
-    name = "nixos-19.09-2019-10-24";
-    url = https://github.com/nixos/nixpkgs/;
-    rev = "f6dac8083874408fe287525007d3da9decd9bf44";
-    ref = "release-19.09";
-  }) {};
+  nixpkgs = import <nixpkgs> {};
   inherit (nixpkgs) lib recurseIntoAttrs;
 
   /* Filters attributes which can evaluate
