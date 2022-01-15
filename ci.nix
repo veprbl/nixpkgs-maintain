@@ -96,5 +96,5 @@ let
 in
 builtins.mapAttrs (name: value: recurseIntoAttrs (recurse_filter build_filter value))
   {
-    inherit (nixpkgs) pkgs pkgsi686Linux;
+    inherit (nixpkgs) pkgs;
   }
